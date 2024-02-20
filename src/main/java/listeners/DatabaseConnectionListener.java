@@ -1,48 +1,47 @@
 package listeners;
-import java.sql.Connection;
+
+
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextListener;
+import jakarta.servlet.annotation.WebListener;
+import org.apache.commons.dbcp.BasicDataSource;
+
 import java.sql.SQLException;
 
-import jakarta.servlet.ServletContextEvent;
-import jakarta.servlet.annotation.WebListener;
-import jakarta.servlet.http.HttpSessionListener;
-
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
-
 @WebListener
-public class DatabaseConnectionListener implements HttpSessionListener {
-    private Connection connection;
-    public static final String DB_CONNECTION = "DB_CONNECTION";
+public class DatabaseConnectionListener implements ServletContextListener {
 
-    /**
-     * Default constructor.
-     */
-    public DatabaseConnectionListener() {
-    }
-
+    @Override
     public void contextInitialized(ServletContextEvent sce) {
-        InitialContext ic;
-        try {
-            ic = new InitialContext();
-            DataSource ds;
-            ds = (DataSource) ic.lookup("java:comp/env/jdbc/Jee");
-            connection = ds.getConnection();
-            sce.getServletContext().setAttribute(DB_CONNECTION, connection);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        ServletContext context = sce.getServletContext();
+
+        // Initialize database connection pool
+        BasicDataSource dataSource = new BasicDataSource();
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/teamapp");
+        dataSource.setUsername("root");
+        dataSource.setPassword("");
+        dataSource.setInitialSize(5); // Initial number of connections in the pool
+
+        // Set the DataSource as an attribute in the ServletContext
+        context.setAttribute("dbConnection", dataSource);
+
+        System.out.println("Database connection initialized.");
     }
 
+    @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        Connection connection = (Connection) sce.getServletContext().getAttribute(DB_CONNECTION);
+        ServletContext context = sce.getServletContext();
 
-        // Close the connection
-        if (connection != null) {
+        // Close the database connection pool
+        BasicDataSource dataSource = (BasicDataSource) context.getAttribute("dbConnection");
+        if (dataSource != null) {
             try {
-                connection.close();
+                dataSource.close();
+                System.out.println("Database connection closed.");
             } catch (SQLException e) {
-                throw new IllegalStateException("Error closing the database connection", e);
+                e.printStackTrace();
             }
         }
     }

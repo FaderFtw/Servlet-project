@@ -1,16 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <title>Football Team Management System</title>
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-<h2>J2E Session & Filter example!</h2>
-<h4>To start adding information, you can start by this form : </h4>
-<a href="/generalInfoForm" rel="noreferrer" target="_blank">GeneralInfoForm</a>
-<h4>then :</h4>
-<a href="/personalInfoForm" rel="noreferrer" target="_blank">PersonalInfoForm</a>
-<h4>To display saved session values :</h4>
-<a href="/myInfo" rel="noreferrer" target="_blank">My information</a>
-<h4>To logout :</h4>
-<a href="/deleteInfo" rel="noreferrer" target="_blank">Logout</a>
+<div class="container">
+    <h1>Welcome to Football Team Management System</h1>
+    <p>This application allows you to manage football teams.</p>
+    <p>Please login or register to get started.</p>
+    <div>
+        <a href="/loginPage" class="btn">Login</a>
+        <a href="/registerPage" class="btn">Register</a>
+    </div>
+</div>
 </body>
 </html>

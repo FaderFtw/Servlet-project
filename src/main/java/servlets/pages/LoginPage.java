@@ -7,10 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/generalInfoForm")
-public class GeneralInfoForm extends HttpServlet {
+@WebServlet("/loginPage")
+public class LoginPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/generalInfoForm.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
     }
 }
