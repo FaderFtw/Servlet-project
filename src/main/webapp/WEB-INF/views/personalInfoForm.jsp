@@ -1,4 +1,7 @@
 <html>
+<head>
+    <link href="../../css/style.css" rel="stylesheet">
+</head>
 <body>
 <h2>Personal Info</h2>
     <form action="registerPersonalInfo">

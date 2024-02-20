@@ -1,4 +1,7 @@
 <html>
+<head>
+    <link href="css/style.css" rel="stylesheet">
+</head>
 <body>
 <h2>J2E Session & Filter example!</h2>
 <h4>To start adding information, you can start by this form : </h4>
