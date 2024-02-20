@@ -1,4 +1,4 @@
-package servlets.pages;
+package servlets.controllers;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,6 +12,6 @@ public class TeamControllerServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/views/teams.jsp").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Handle form submission
+        request.getRequestDispatcher("/WEB-INF/views/teamForm.jsp").forward(request, response);
     }
 }

@@ -34,11 +34,12 @@ public class LoginServlet extends HttpServlet {
                 user.setId(resultSet.getInt("id"));
                 user.setUsername(resultSet.getString("username"));
                 user.setEmail(resultSet.getString("email"));
+                user.setRole(resultSet.getString("role"));
 
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-
-                response.sendRedirect("/Teams");
+                session.setAttribute("success", "Logged in Successfully");
+                response.sendRedirect("/ListTeamsServlet");
             } else {
                 response.sendRedirect("/loginPage");
             }

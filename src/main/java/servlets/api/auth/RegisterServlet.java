@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import beans.User;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -30,8 +31,7 @@ public class RegisterServlet extends HttpServlet {
             int rowsAffected = preparedStatement.executeUpdate();
 
             if (rowsAffected > 0) {
-                // Registration successful
-                response.sendRedirect("/Teams");
+                response.sendRedirect("/loginPage");
             } else {
                 // Registration failed
                 response.sendRedirect("/registerPage");
