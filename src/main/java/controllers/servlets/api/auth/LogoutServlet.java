@@ -1,4 +1,4 @@
-package servlets.api.auth;
+package controllers.servlets.api.auth;
 
 import java.io.*;
 import jakarta.servlet.*;

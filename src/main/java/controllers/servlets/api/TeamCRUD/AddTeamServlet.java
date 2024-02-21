@@ -1,4 +1,4 @@
-package servlets.api.TeamCRUD;
+package controllers.servlets.api.TeamCRUD;
 
 
 import java.io.IOException;
