@@ -199,16 +199,18 @@
         </form>
     </div>
 </div>
+<jsp:useBean id="teams" class="java.util.ArrayList" scope="session"/>
+<jsp:useBean id="team" class="beans.Team"/>
 
 <div class="container">
-    <c:forEach var="team" items="${sessionScope.teams}">
+    <c:forEach var="team" items="${teams}">
         <div class="team-card">
-            <h2>${team.name}</h2>
-            <p><span class="label">Country:</span> ${team.country}</p>
-            <p><span class="label">League:</span> ${team.league}</p>
-            <p><span class="label">Number of Titles:</span> ${team.numberOfTitles}</p>
-            <p><span class="label">Number of Players:</span> ${team.numberOfPlayers}</p>
-            <p><span class="label">Stadium:</span> ${team.stadium}</p>
+            <h2><jsp:getProperty name="team" property="name"/></h2>
+            <p><span class="label">Country:</span> <jsp:getProperty name="team" property="country"/></p>
+            <p><span class="label">League:</span> <jsp:getProperty name="team" property="league"/></p>
+            <p><span class="label">Number of Titles:</span> <jsp:getProperty name="team" property="numberOfTitles"/></p>
+            <p><span class="label">Number of Players:</span> <jsp:getProperty name="team" property="numberOfPlayers"/></p>
+            <p><span class="label">Stadium:</span> <jsp:getProperty name="team" property="stadium"/></p>
             <button class="btn">View Details</button>
         </div>
     </c:forEach>

@@ -44,8 +44,9 @@ public class ListTeamsServlet extends HttpServlet {
                 Team team = new Team(name, country, league, numTitles, numPlayers, stadium);
                 teams.add(team);
             }
+
             session.setAttribute("teams", teams);
-            response.sendRedirect("/Teams");
+            request.getRequestDispatcher("/Teams").forward(request, response);
         } catch (SQLException e) {
             session.setAttribute("error", "Failed to fetch teams");
             response.sendRedirect("/Teams");
