@@ -12,8 +12,8 @@
     <p>This application allows you to manage football teams.</p>
     <p>Please login or register to get started.</p>
     <div>
-        <a href="/loginPage" class="btn">Login</a>
-        <a href="/registerPage" class="btn">Register</a>
+        <a href="/Auth?action=viewLogin" class="btn">Login</a>
+        <a href="/Auth?action=viewRegister" class="btn">Register</a>
     </div>
 </div>
 </body>

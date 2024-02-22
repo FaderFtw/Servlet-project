@@ -31,13 +31,15 @@ public class RoleFilter extends HttpFilter {
         HttpSession session = httpRequest.getSession(false);
 
         String method = ((HttpServletRequest) request).getMethod();
-        if(method.equals("POST")){
+        String action = request.getParameter("action");
+
+        if(method.equals("GET") && action.equals("viewTeamForm")){
             User user = (User) session.getAttribute("user");
             if(user.getRole().equals("admin")) {
                 chain.doFilter(request, response);
             } else {
                 session.setAttribute("error", "You don't have access to add a team");
-                httpResponse.sendRedirect(httpRequest.getContextPath() + "/Teams");
+                httpResponse.sendRedirect(httpRequest.getContextPath() + "/Teams?action=viewTeams");
             }
         }
         else{

@@ -9,12 +9,12 @@
 <body>
 <div class="container">
     <h1>Login</h1>
-    <form action="/LoginServlet" method="post">
+    <form action="/Auth" method="post">
         <input type="text" name="username" placeholder="Username" required><br><br>
         <input type="password" name="password" placeholder="Password" required><br><br>
-        <button type="submit" class="btn">Login</button>
+        <button type="submit" name="action" value="login" class="btn">Login</button>
     </form>
-    <p>Don't have an account? <a href="/registerPage">Register</a></p>
+    <p>Don't have an account? <a href="/Auth?action=viewRegister">Register</a></p>
 </div>
 </body>
 </html>

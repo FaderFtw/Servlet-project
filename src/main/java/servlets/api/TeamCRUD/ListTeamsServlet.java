@@ -1,4 +1,4 @@
-package controllers.servlets.api.TeamCRUD;
+package servlets.api.TeamCRUD;
 
 
 import java.io.IOException;
@@ -46,10 +46,10 @@ public class ListTeamsServlet extends HttpServlet {
             }
 
             session.setAttribute("teams", teams);
-            request.getRequestDispatcher("/Teams").forward(request, response);
+            request.getRequestDispatcher("/Teams?action=viewTeams").forward(request, response);
         } catch (SQLException e) {
             session.setAttribute("error", "Failed to fetch teams");
-            response.sendRedirect("/Teams");
+            response.sendRedirect("/Teams?action=viewTeams");
         }
     }
 }

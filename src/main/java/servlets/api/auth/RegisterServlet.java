@@ -1,4 +1,4 @@
-package controllers.servlets.api.auth;
+package servlets.api.auth;
 
 import java.io.*;
 import java.sql.Connection;
@@ -31,14 +31,14 @@ public class RegisterServlet extends HttpServlet {
             int rowsAffected = preparedStatement.executeUpdate();
 
             if (rowsAffected > 0) {
-                response.sendRedirect("/loginPage");
+                response.sendRedirect("/Auth?action=viewLogin");
             } else {
                 // Registration failed
-                response.sendRedirect("/registerPage");
+                response.sendRedirect("/Auth?action=viewRegister");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            response.sendRedirect("/registerPage");
+            response.sendRedirect("/Auth?action=viewRegister");
         }
     }
 }

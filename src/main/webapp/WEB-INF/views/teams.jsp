@@ -183,6 +183,35 @@
                 width: 0;
             }
         }
+
+        .buttons{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .addTitleBtn, .removeTitleBtn{
+            border-radius: 25%;
+            padding: 7px;
+            width: 30px;
+            height: 30px;
+            font-size: 15px;
+            text-align: center;
+            color: white;
+        }
+
+        .addTitleBtn:hover, .removeTitleBtn:hover{
+            background-color: #0056b3;
+        }
+
+        .addTitleBtn{
+            background-color: #129857;
+            margin-right: 20px;
+        }
+
+        .removeTitleBtn{
+            background-color: red;
+        }
     </style>
 </head>
 <body>
@@ -190,20 +219,32 @@
     <h1>Teams</h1>
     <div style="display: flex;">
 
-        <form action="/Teams" method="post">
-            <button class="btn add-team-btn">Add Team</button>
+        <form action="/Teams" method="get">
+            <button type="submit" name="action" value="viewTeamForm" class="btn add-team-btn">Add Team</button>
         </form>
 
-        <form action="LogoutServlet" method="post">
-            <button type="submit" class="btn logout-btn">Logout</button>
+        <form action="/Auth" method="post">
+            <button type="submit" name="action" value="logout" class="btn logout-btn">Logout</button>
         </form>
     </div>
 </div>
+
 <jsp:useBean id="teams" class="java.util.ArrayList" scope="session"/>
 <jsp:useBean id="team" class="beans.Team"/>
 
 <div class="container">
     <c:forEach var="team" items="${teams}">
+        <c:choose>
+            <c:when test="${team.getNumberOfTitles() > 20}">
+                <jsp:setProperty name="team" property="status" value="Excellent" />
+            </c:when>
+            <c:when test="${team.getNumberOfTitles() > 10}">
+                <jsp:setProperty name="team" property="status" value="Good" />
+            </c:when>
+            <c:otherwise>
+                <jsp:setProperty name="team" property="status" value="Average" />
+            </c:otherwise>
+        </c:choose>
         <div class="team-card">
             <h2><jsp:getProperty name="team" property="name"/></h2>
             <p><span class="label">Country:</span> <jsp:getProperty name="team" property="country"/></p>
@@ -211,7 +252,7 @@
             <p><span class="label">Number of Titles:</span> <jsp:getProperty name="team" property="numberOfTitles"/></p>
             <p><span class="label">Number of Players:</span> <jsp:getProperty name="team" property="numberOfPlayers"/></p>
             <p><span class="label">Stadium:</span> <jsp:getProperty name="team" property="stadium"/></p>
-            <button class="btn">View Details</button>
+            <p><span class="label">Status:</span> <jsp:getProperty name="team" property="status"/></p>
         </div>
     </c:forEach>
 </div>

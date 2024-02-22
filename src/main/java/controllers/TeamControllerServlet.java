@@ -9,9 +9,38 @@ import java.io.IOException;
 @WebServlet("/Teams")
 public class TeamControllerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Call the appropriate method based on the request parameters or URL
+        String action = request.getParameter("action");
+        if ("viewTeams".equals(action)) {
+            viewTeams(request, response);
+        } else if ("viewTeamForm".equals(action)) {
+            viewTeamForm(request, response);
+        } else {
+            viewTeams(request, response);
+        }
+    }
+
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Call the appropriate method based on the request parameters or URL
+        String action = request.getParameter("action");
+        if ("addTeam".equals(action)) {
+            addTeam(request, response);
+        } else {
+            viewTeams(request, response);
+        }
+    }
+
+
+    private void viewTeams(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/views/teams.jsp").forward(request, response);
     }
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    private void viewTeamForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/views/teamForm.jsp").forward(request, response);
+    }
+
+    private void addTeam(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/AddTeamServlet").forward(request, response);
     }
 }

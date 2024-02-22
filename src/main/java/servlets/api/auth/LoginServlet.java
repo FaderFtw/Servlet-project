@@ -1,4 +1,4 @@
-package controllers.servlets.api.auth;
+package servlets.api.auth;
 
 import java.io.*;
 import java.sql.Connection;
@@ -41,11 +41,11 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("success", "Logged in Successfully");
                 response.sendRedirect("/ListTeamsServlet");
             } else {
-                response.sendRedirect("/loginPage");
+                response.sendRedirect("/Auth?action=viewLogin");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            response.sendRedirect("/loginPage");
+            response.sendRedirect("/Auth?action=viewLogin");
         }
     }
 }

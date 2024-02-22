@@ -31,9 +31,8 @@ public class AuthorizedFilter extends HttpFilter {
         HttpSession session = httpRequest.getSession(false);
         User user = (User) session.getAttribute("user");
 
-
         if (user == null) {
-            httpResponse.sendRedirect(httpRequest.getContextPath() + "/loginPage");
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/Auth?action=viewLogin");
         } else {
             request.setAttribute("id", user.getId());
             chain.doFilter(request, response);

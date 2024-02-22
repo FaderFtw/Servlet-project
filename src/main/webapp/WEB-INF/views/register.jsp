@@ -9,13 +9,13 @@
 <body>
 <div class="container">
     <h1>Register</h1>
-    <form action="/RegisterServlet" method="post">
+    <form action="/Auth" method="post">
         <input type="text" name="username" placeholder="Username" required><br><br>
         <input type="email" name="email" placeholder="Email" required><br><br>
         <input type="password" name="password" placeholder="Password" required><br><br>
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" name="action" value="register" class="btn">Register</button>
     </form>
-    <p>Already have an account? <a href="/loginPage">Login</a></p>
+    <p>Already have an account? <a href="/Auth?action=viewLogin">Login</a></p>
 </div>
 </body>
 </html>

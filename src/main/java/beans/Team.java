@@ -10,6 +10,8 @@ public class Team implements Serializable {
     private int numberOfPlayers;
     private String stadium;
 
+    private String status = "";
+
     public Team() {
     }
 
@@ -69,6 +71,14 @@ public class Team implements Serializable {
 
     public void setStadium(String stadium) {
         this.stadium = stadium;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
 

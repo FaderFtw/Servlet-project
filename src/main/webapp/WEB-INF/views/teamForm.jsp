@@ -60,14 +60,14 @@
 
 <div class="container">
     <h1>Add New Team</h1>
-    <form action="${pageContext.request.contextPath}/AddTeamServlet" method="post">
+    <form action="/Teams" method="post">
         <input type="text" name="name" placeholder="Team Name" required><br>
         <input type="text" name="country" placeholder="Country" required><br>
         <input type="text" name="league" placeholder="League" required><br>
         <input type="number" name="numTitles" placeholder="Number of Titles" required><br>
         <input type="number" name="numPlayers" placeholder="Number of Players" required><br>
         <input type="text" name="stadium" placeholder="Stadium" required><br>
-        <button type="submit" class="btn">Add Team</button>
+        <button type="submit" name="action" value="addTeam" class="btn">Add Team</button>
     </form>
 </div>
 

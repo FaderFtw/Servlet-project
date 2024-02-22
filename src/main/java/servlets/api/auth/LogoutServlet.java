@@ -1,4 +1,4 @@
-package controllers.servlets.api.auth;
+package servlets.api.auth;
 
 import java.io.*;
 import jakarta.servlet.*;
@@ -12,6 +12,6 @@ public class LogoutServlet extends HttpServlet {
         if (session != null) {
             session.invalidate();
         }
-        response.sendRedirect("/loginPage");
+        response.sendRedirect("/Auth?action=viewLogin");
     }
 }

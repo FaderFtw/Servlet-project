@@ -1,4 +1,4 @@
-package controllers.servlets.api.TeamCRUD;
+package servlets.api.TeamCRUD;
 
 
 import java.io.IOException;
@@ -24,6 +24,8 @@ public class AddTeamServlet extends HttpServlet {
 
         DataSource dataSource = (DataSource) getServletContext().getAttribute("dbConnection");
         try {
+            Connection connection = dataSource.getConnection();
+
             String name = request.getParameter("name");
             String country = request.getParameter("country");
             String league = request.getParameter("league");
@@ -31,11 +33,6 @@ public class AddTeamServlet extends HttpServlet {
             int numPlayers = Integer.parseInt(request.getParameter("numPlayers"));
             String stadium = request.getParameter("stadium");
 
-
-
-
-
-            Connection connection = dataSource.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO teams (name, country, league, nb_titles, nb_players, stadium) VALUES (?, ?, ?, ?, ?, ?)");
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, country);
@@ -46,7 +43,6 @@ public class AddTeamServlet extends HttpServlet {
 
             int rowsAffected = preparedStatement.executeUpdate();
 
-
             if (rowsAffected > 0) {
                 session.setAttribute("success","Team Added");
                 response.sendRedirect("/ListTeamsServlet");
@@ -55,7 +51,7 @@ public class AddTeamServlet extends HttpServlet {
                 response.sendRedirect("/ListTeamsServlet");
             }
         } catch (NumberFormatException e) {
-            session.setAttribute("error","Invalid number format");
+            session.setAttribute("error","Invalid input format");
             response.sendRedirect("/ListTeamsServlet");
         } catch (SQLException e) {
             session.setAttribute("error","Team Not Added");
