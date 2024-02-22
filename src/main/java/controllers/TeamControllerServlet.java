@@ -26,14 +26,15 @@ public class TeamControllerServlet extends HttpServlet {
         String action = request.getParameter("action");
         if ("addTeam".equals(action)) {
             addTeam(request, response);
+        } else if ("deleteTeam".equals(action)) {
+            deleteTeam(request, response);
         } else {
             viewTeams(request, response);
         }
     }
 
-
     private void viewTeams(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/teams.jsp").forward(request, response);
+        request.getRequestDispatcher("/ListTeamsServlet").forward(request, response);
     }
 
     private void viewTeamForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,5 +43,9 @@ public class TeamControllerServlet extends HttpServlet {
 
     private void addTeam(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("/AddTeamServlet").forward(request, response);
+    }
+
+    private void deleteTeam(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/DeleteTeamServlet").forward(request, response);
     }
 }

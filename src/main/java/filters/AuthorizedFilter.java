@@ -29,14 +29,21 @@ public class AuthorizedFilter extends HttpFilter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession session = httpRequest.getSession(false);
-        User user = (User) session.getAttribute("user");
 
-        if (user == null) {
-            httpResponse.sendRedirect(httpRequest.getContextPath() + "/Auth?action=viewLogin");
-        } else {
-            request.setAttribute("id", user.getId());
-            chain.doFilter(request, response);
+        if (session != null){
+            User user = (User) session.getAttribute("user");
+            if (user == null ) {
+                httpResponse.sendRedirect(httpRequest.getContextPath() + "/Auth?action=viewLogin");
+            } else {
+                request.setAttribute("id", user.getId());
+                chain.doFilter(request, response);
+            }
         }
+        else {
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/Auth?action=viewLogin");
+        }
+
+
     }
 
     @Override

@@ -23,10 +23,11 @@ public class RegisterServlet extends HttpServlet {
 
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, email);
             preparedStatement.setString(3, password);
+            preparedStatement.setString(4, "user");
 
             int rowsAffected = preparedStatement.executeUpdate();
 

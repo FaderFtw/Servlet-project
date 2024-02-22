@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
                 session.setAttribute("success", "Logged in Successfully");
-                response.sendRedirect("/ListTeamsServlet");
+                response.sendRedirect("/Teams?action=viewTeams");
             } else {
                 response.sendRedirect("/Auth?action=viewLogin");
             }

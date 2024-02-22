@@ -29,27 +29,12 @@ public class ListTeamsServlet extends HttpServlet {
         DataSource dataSource = (DataSource) getServletContext().getAttribute("dbConnection");
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM teams");
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                String country = resultSet.getString("country");
-                String league = resultSet.getString("league");
-                int numTitles = resultSet.getInt("nb_titles");
-                int numPlayers = resultSet.getInt("nb_players");
-                String stadium = resultSet.getString("stadium");
-
-                Team team = new Team(name, country, league, numTitles, numPlayers, stadium);
-                teams.add(team);
-            }
-
+            Team.all(connection, request, teams);
             session.setAttribute("teams", teams);
-            request.getRequestDispatcher("/Teams?action=viewTeams").forward(request, response);
         } catch (SQLException e) {
             session.setAttribute("error", "Failed to fetch teams");
-            response.sendRedirect("/Teams?action=viewTeams");
+
         }
+        request.getRequestDispatcher("/WEB-INF/views/teams.jsp").forward(request, response);
     }
 }

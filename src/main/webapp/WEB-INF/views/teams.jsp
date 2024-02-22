@@ -78,6 +78,10 @@
             margin-right: 10px; /* Add margin to separate buttons */
         }
 
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
         .add-team-btn {
             background-color: #28a745;
         }
@@ -86,8 +90,13 @@
             background-color: #dc3545; /* Red color for logout button */
         }
 
-        .btn:hover {
-            background-color: #0056b3;
+        .delete-btn {
+            background-color: #dc3545; /* Red color for logout button */
+        }
+
+        .delete-btn:hover{
+            background-color: #2b2d30;
+            color: white
         }
 
         .toast {
@@ -253,6 +262,10 @@
             <p><span class="label">Number of Players:</span> <jsp:getProperty name="team" property="numberOfPlayers"/></p>
             <p><span class="label">Stadium:</span> <jsp:getProperty name="team" property="stadium"/></p>
             <p><span class="label">Status:</span> <jsp:getProperty name="team" property="status"/></p>
+            <form action="/Teams" method="post">
+                <input type="hidden" name="teamId" value="${team.getId()}">
+                <button type="submit" name="action" value="deleteTeam" class="btn delete-btn">Delete Team</button>
+            </form>
         </div>
     </c:forEach>
 </div>

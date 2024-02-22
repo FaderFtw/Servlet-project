@@ -7,7 +7,7 @@ public class User implements Serializable {
     private String username;
     private String email;
     private String password;
-    private String role; // New field for role attribute
+    private String role = "user"; // New field for role attribute
 
     public User() {
     }
