@@ -224,8 +224,12 @@
     </style>
 </head>
 <body>
+<jsp:useBean id="user" class="beans.User" scope="session"/>
 <div class="header">
-    <h1>Teams</h1>
+    <div style="display: flex; flex-direction: column; text-align: center; align-self: center; padding-top: 20px;">
+        <h2 style="margin: 0">Welcome, <jsp:getProperty name="user" property="username"/></h2>
+        <h1>Teams</h1>
+    </div>
     <div style="display: flex;">
 
         <form action="/Teams" method="get">
@@ -237,7 +241,6 @@
         </form>
     </div>
 </div>
-
 <jsp:useBean id="teams" class="java.util.ArrayList" scope="session"/>
 <jsp:useBean id="team" class="beans.Team"/>
 
