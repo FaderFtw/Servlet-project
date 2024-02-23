@@ -226,7 +226,7 @@
 <body>
 <jsp:useBean id="user" class="beans.User" scope="session"/>
 <div class="header">
-    <div style="display: flex; flex-direction: column; text-align: center; align-self: center; padding-top: 20px;">
+    <div style="display: flex; flex-direction: column; text-align: center; align-self: center; padding-top: 20px;m">
         <h2 style="margin: 0">Welcome, <jsp:getProperty name="user" property="username"/></h2>
         <h1>Teams</h1>
     </div>

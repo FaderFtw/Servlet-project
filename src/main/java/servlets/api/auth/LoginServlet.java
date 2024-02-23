@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import beans.Team;
 import beans.User;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,27 +17,15 @@ import javax.sql.DataSource;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
+        HttpSession session = request.getSession();
         DataSource dataSource = (DataSource) getServletContext().getAttribute("dbConnection");
 
         try {
             Connection connection = dataSource.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if(resultSet.next()) {
-                User user = new User();
-                user.setId(resultSet.getInt("id"));
-                user.setUsername(resultSet.getString("username"));
-                user.setEmail(resultSet.getString("email"));
-                user.setRole(resultSet.getString("role"));
-
-                HttpSession session = request.getSession();
+            User user = new User();
+            boolean success = User.login(connection, request, user);
+            
+            if(success) {
                 session.setAttribute("user", user);
                 session.setAttribute("success", "Logged in Successfully");
                 response.sendRedirect("/Teams?action=viewTeams");
